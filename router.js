@@ -37,6 +37,8 @@ router.get('/api/guild/:guildId', async ctx => {
     ...data,
     players,
   }
+
+  ctx.set('Cache-Control', 'public, max-age=3600')
 })
 
 module.exports = router
