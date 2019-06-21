@@ -24,7 +24,7 @@ const combatTypeFilter = type => unit => unit.data.combat_type === type
 
 router.get('/api/guild/:guildId', async ctx => {
   const { data } = await axios.get(`${BASE_URL}/guild/${ctx.params.guildId}/`)
-  const combatType = ctx.query.combat_type || 1
+  const combatType = ctx.query.combat_type ? parseInt(ctx.query.combat_type) : 1
   const players = data.players.map(({ data, units }) => ({
     data: pick(data, playerProps),
     units: units.filter(combatTypeFilter(combatType)).map(unitMapper),
